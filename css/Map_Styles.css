@@ -1,0 +1,61 @@
+html, body {
+  font-family: Arial, sans-serif;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #C2EDC2;
+}
+.container {
+  height: 100%;
+  position: relative;
+}
+input {
+  font-size: 12px;
+}
+h1 {
+  color: #000000;
+  font-size: 22px;
+  margin: 0 0 10px 0;
+  text-align: center;
+}
+#filter-options {
+  width: 100%;
+}
+#all-markers, #unique-marker {
+  font-family: fantasy;
+  text-decoration: blink;
+}
+hr {
+  background: #D0D7D9;
+  height: 1px;
+  margin: 20px 0 20px 0;
+  border: none;
+}
+#map {
+  bottom:0px;
+  height: 100%;
+  left: 230px;
+  position: absolute;
+  right: 0px;
+}
+.options-box {
+  background: #f4dc42;
+  border: 5px solid #808000;
+  border-radius: 30px;
+  height: 100%;
+  line-height: 35px;
+  padding: 10px 10px 30px 10px;
+  text-align: left;
+  width: 200px;
+}
+#pano {
+  width: 200px;
+  height: 200px;
+}
+.text {
+  font-size: 12px;
+}
+
+.people-list {
+  font-size: 8pt;
+}
