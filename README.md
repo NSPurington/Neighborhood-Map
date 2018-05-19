@@ -12,9 +12,9 @@ Open index.html in browser
 
 # Languages/Frameworks/Libraries
 
-HTML, CSS, JavaScript - Frontend code
-Knockout.js - For populating the veiw HTML data when location filter is used
-Jquery - Utilized for AJAX calls (for cross-browser compatibility)
+1. HTML, CSS, JavaScript - Frontend code
+2. Knockout.js - For populating the veiw HTML data when location filter is used
+3. Jquery - Utilized for AJAX calls (for cross-browser compatibility)
 
 # Acknowledgments
 
