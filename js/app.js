@@ -194,10 +194,6 @@ function populateInfoWindow(marker, infowindow) {
   var fsqClientSecret = '&client_secret=VWXXE0PAQSN2NXGQNEI3F1SPOGH3RZVGUW5VSMBZABF0WGR1';
   var versionParam = '&v=20180510';
 
-  // var infowindow = new google.maps.InfoWindow({
-  //   maxWidth: 250,
-  // }); 
-
   // FourSquare ajax request for venue info
   $.ajax({
     url: 'https://api.foursquare.com/v2/venues/' + marker.get("venueID") + fsqClientID + fsqClientSecret + versionParam,
@@ -225,22 +221,10 @@ function populateInfoWindow(marker, infowindow) {
               '<p class="attribution">By Foursquare</p>' +
           '</div>' +  
           '</div>';
-      infowindow.setContent(location.contentString);     
-    }.fail(function() {
-      alert ("An error has occurred....Please try again")
-    })
-  })
-
+      infowindow.setContent(location.contentString);
+    },   
+    fail: (function() {
+      alert ("An error has occurred....Please try again");
+    })       
+  });
 }
-
-
-
-
-
-
-  
-
-     
-
-
-
