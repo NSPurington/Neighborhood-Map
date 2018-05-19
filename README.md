@@ -18,9 +18,9 @@ Open index.html in browser
 
 # Acknowledgments
 
-Udacity - For code snippets
-Google Maps API - For Google Map code
-Foursquare API - For venue information
+1. Udacity - For code snippets
+2. Google Maps API - For Google Map code
+3. Foursquare API - For venue information
 
 
 Author - Nick Purington - Udacity student/Aspiring Web Developer
