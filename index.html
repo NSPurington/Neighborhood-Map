@@ -11,7 +11,7 @@
       <div class="options-box">
         <h1>Explore Milwaukee</h1>
         <div class="container">
-          <select id="filter-options" data-bind="options: locations, value: selectedOption, optionsValue: 'title', valueUpdate: 'input', optionsText: 'title', optionsCaption: 'Filter Options...'">
+          <select id="filter-options" data-bind="options: locations, value: selectedOption, optionsValue: 'title', valueUpdate: 'input', optionsText: 'title', optionsCaption: 'Filter Options...', event: { click: showMarkers}">
           </select> 
           <span>
             <a id="unique-marker" data-bind="text: selectedOption"></a> 

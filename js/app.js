@@ -2,7 +2,7 @@ var locations = [
     {title: 'The Bronze Fonz', location: {lat: 43.0410, lng: -87.9098}, venueID: '4ba13890f964a52069a337e3'},
     {title: "Shaker's Cigar Bar", location: {lat: 43.0268, lng: -87.9125}, venueID: '4ff77595e4b0a0306c55cadc'},
     {title: "Safe House", location: {lat: 43.0404, lng: -87.9101}, venueID: '4a74fb1bf964a52031e01fe3'},
-    {title: "Pabst Mansion", location: {lat: 43.0392, lng: -87.9380}, venueID: '4ba13aa8f964a5201ca437e3'},
+    {title: "Pabst Mansion", location: {lat: 43.0392, lng: -87.9380}, venueID: '4b3109b6f964a520b6fe24e3'},
     {title: "Harley-Davidson Museum", location: {lat: 43.031939, lng: -87.916455}, venueID: '4ad4ac8af964a5209ae820e3'},
   ];
 var map;
@@ -135,10 +135,6 @@ function initMap() {
 
     // Event puts marker instances in "pickaMarker" variable
     google.maps.event.addListener(marker, 'click', pickMarker(marker));
-
-    // Event listeners to trigger location markers
-    document.getElementById('filter-options').addEventListener('click', hideMarkers);
-    document.getElementById('filter-options').addEventListener('click', showMarkers);
   }
 
   // This function takes in a COLOR, and then creates a new marker
@@ -152,42 +148,41 @@ function initMap() {
       new google.maps.Point(0, 0),
       new google.maps.Point(10, 34),
       new google.maps.Size(21,34));
-    return markerImage;
-    
+    return markerImage; 
   } 
 }
 
-// Knockout.js activated to update selected location on map
+// Knockout.js watching to update selected location on map when changed
 var locationFilter = {
   locations: ko.observableArray(locations),
   selectedOption: ko.observable('')
 }
 
-// T
+// This starts Knockout.js
 ko.applyBindings(locationFilter);
 
-// Hides all markers when filter drop-down is selected 
-function hideMarkers() {
-  for (var i = 0; i < markers.length; i++) {
-    markers[i].setMap(null);
-  }
-}
 
 // Drops the marker on the selected location from the filter drop-dowm 
 function showMarkers() {
   for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(null);
     if (markers[i].title === document.getElementById('unique-marker').text){
-    markers[i].setAnimation(google.maps.Animation.DROP);
-    markers[i].setMap(map);
+      markers[i].setAnimation(google.maps.Animation.DROP);
+      markers[i].setMap(map);
+    }
+    else if (document.getElementById('unique-marker').text === ""){
+      markers[i].setAnimation(google.maps.Animation.DROP);
+      markers[i].setMap(map);
     }
   }  
+  console.log(document.getElementById("unique-marker").text)
 }
 
 
 // This function populates the infowindow when the marker is clicked. 
 function populateInfoWindow(marker, infowindow) {
   // Check to make sure the infowindow is not already opened on this marker.
-  infowindow.setContent(location.contentString);
+  infowindow.setContent("Loading...");
   infowindow.open(map, marker);
   // Make sure the marker property is cleared if the infowindow is closed.
   infowindow.addListener('closeclick',function(){
@@ -229,9 +224,13 @@ function populateInfoWindow(marker, infowindow) {
               '<p>Click to read more on <a href="' + venueInfo.canonicalUrl + '?ref=' + fsqClientID + '" target="_blank">Foursquare</a></p>' +
               '<p class="attribution">By Foursquare</p>' +
           '</div>' +  
-          '</div>'; 
-    }
-  })        
+          '</div>';
+      infowindow.setContent(location.contentString);     
+    }.fail(function() {
+      alert ("An error has occurred....Please try again")
+    })
+  })
+
 }
 
 
