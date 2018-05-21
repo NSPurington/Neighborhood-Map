@@ -4,26 +4,23 @@
   <title>Milwaukee</title>
   <link rel="stylesheet" href="css/Map_Styles.css">
   <script type='text/javascript' src='bower_components\knockout\dist\knockout.js'></script>
-  
 </head>
 <body>
   <div class="container">
       <div class="options-box">
         <h1>Explore Milwaukee</h1>
-        <div class="container">
-          <select id="filter-options" data-bind="options: locations, value: selectedOption, optionsValue: 'title', valueUpdate: 'input', optionsText: 'title', optionsCaption: 'Filter Options...', event: { click: showMarkers}">
-          </select> 
-          <span>
-            <a id="unique-marker" data-bind="text: selectedOption"></a> 
-            <span data-bind="visible: !selectedOption(), foreach: locations">
-              <br><a id="all-markers" data-bind="text: $data.title"></a>
-            </span>
-          </span>  
-        </div>
+        <select id="filter-options" data-bind="options: locations, value: selectedOption, optionsValue: 'title', valueUpdate: 'input', optionsText: 'title', optionsCaption: 'Filter Options...', event: { click: showMarkers}">
+        </select> 
+        <span>
+          <a id="unique-marker" data-bind="text: selectedOption"></a> 
+          <span data-bind="visible: !selectedOption(), foreach: locations">
+            <br><a id="all-markers" data-bind="text: $data.title"></a>
+          </span>
+        </span>  
       </div>
-      <div id="map"></div>
     </div>
-  </div>  
+  </div>
+  <div id="map"></div>  
   <script async defer
   src=
   "https://maps.googleapis.com/maps/api/js?key=AIzaSyD5-U0pwWDLPNmdrxQmxZcEUUYiDlf2804&libraries=geometry&v=3&callback=initMap"></script>

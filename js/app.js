@@ -1,3 +1,10 @@
+// Knockout.js watching to update selected location on map when changed
+var viewModel = {
+  locations: ko.observableArray(locations),
+  selectedOption: ko.observable('')
+};
+
+// All locations to display as markers on map
 var locations = [
     {title: 'The Bronze Fonz', location: {lat: 43.0410, lng: -87.9098}, venueID: '4ba13890f964a52069a337e3'},
     {title: "Shaker's Cigar Bar", location: {lat: 43.0268, lng: -87.9125}, venueID: '4ff77595e4b0a0306c55cadc'},
@@ -5,9 +12,13 @@ var locations = [
     {title: "Pabst Mansion", location: {lat: 43.0392, lng: -87.9380}, venueID: '4b3109b6f964a520b6fe24e3'},
     {title: "Harley-Davidson Museum", location: {lat: 43.031939, lng: -87.916455}, venueID: '4ad4ac8af964a5209ae820e3'},
   ];
+// Makes "map" variable global
 var map;
+
 // Create a new blank array for all the listing markers.
 var markers = [];
+
+// Gets the map loaded, and marker array created with all locations
 function initMap() {
   var styles = [
     {
@@ -74,13 +85,15 @@ function initMap() {
       ]
     }
   ];
+
   // Constructor creates a new map - only center and zoom are required.
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 43.038902, lng: -87.906471},
     zoom: 13,
     styles: styles
   });
-  var largeInfowindow = new google.maps.InfoWindow()
+
+  var largeInfowindow = new google.maps.InfoWindow();
 
   // Style the markers a bit. This will be our listing marker icon.
   var defaultIcon = makeMarkerIcon('00a68c');
@@ -97,8 +110,8 @@ function initMap() {
       setTimeout(function() {
         marker.setAnimation(null);
       }, 800);
-    }
-  }
+    };
+  };
   
   // The following group uses the location array to create an array of markers on initialize.
   for (var i = 0; i < locations.length; i++) {
@@ -120,7 +133,7 @@ function initMap() {
     });
     
     // Add Custom Marker Attribute for venueID to be called in Foursquare  
-    marker.set("venueID", locations[i].venueID)
+    marker.set("venueID", locations[i].venueID);
 
     // Push the marker to our array of markers.
     markers.push(marker);
@@ -133,7 +146,7 @@ function initMap() {
       this.setIcon(defaultIcon);
     });
 
-    // Event puts marker instances in "pickaMarker" variable
+    // Event puts marker instances in "pickMarker" variable
     google.maps.event.addListener(marker, 'click', pickMarker(marker));
   }
 
@@ -149,18 +162,19 @@ function initMap() {
       new google.maps.Point(10, 34),
       new google.maps.Size(21,34));
     return markerImage; 
-  } 
+  }  
 }
+
+// Pops up a window to alert client if there is an error loading the map
+window.onerror = (function() {
+    alert ("An error has occurred while loading the map....Please try again");
+});
 
 // Knockout.js watching to update selected location on map when changed
-var locationFilter = {
+var viewModel = {
   locations: ko.observableArray(locations),
   selectedOption: ko.observable('')
-}
-
-// This starts Knockout.js
-ko.applyBindings(locationFilter);
-
+};
 
 // Drops the marker on the selected location from the filter drop-dowm 
 function showMarkers() {
@@ -169,15 +183,18 @@ function showMarkers() {
     if (markers[i].title === document.getElementById('unique-marker').text){
       markers[i].setAnimation(google.maps.Animation.DROP);
       markers[i].setMap(map);
+      var singleInfowindow = new google.maps.InfoWindow();
+      populateInfoWindow(markers[i], singleInfowindow);
     }
     else if (document.getElementById('unique-marker').text === ""){
       markers[i].setAnimation(google.maps.Animation.DROP);
       markers[i].setMap(map);
     }
   }  
-  console.log(document.getElementById("unique-marker").text)
 }
 
+// This starts Knockout.js
+ko.applyBindings(viewModel);
 
 // This function populates the infowindow when the marker is clicked. 
 function populateInfoWindow(marker, infowindow) {
@@ -222,9 +239,11 @@ function populateInfoWindow(marker, infowindow) {
           '</div>' +  
           '</div>';
       infowindow.setContent(location.contentString);
-    },   
-    fail: (function() {
-      alert ("An error has occurred....Please try again");
-    })       
+    }   
   });
+
+  // Pops up a window to alert client if there is an error with the AJAX call
+  window.onerror = (function() {
+    alert ("An error has occurred while loading the marker details....Please try again");
+  });       
 }
