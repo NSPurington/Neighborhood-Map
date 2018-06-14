@@ -22,7 +22,7 @@ h1 {
   width: 100%;
 }
 #all-markers, #unique-marker {
-  font-family: fantasy;
+  font-family: fantasy, sans-serif;
   font-size: 1.5vw;
   margin: 10px 0 15px 0;
 }
