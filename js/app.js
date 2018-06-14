@@ -7,7 +7,7 @@ var viewModel = {
 // All locations to display as markers on map
 var locations = [
     {title: 'The Bronze Fonz', location: {lat: 43.0410, lng: -87.9098}, venueID: '4ba13890f964a52069a337e3'},
-    {title: "Shaker's Cigar Bar", location: {lat: 43.0268, lng: -87.9125}, venueID: '4ff77595e4b0a0306c55cadc'},
+    {title: "Shakers Cigar Bar", location: {lat: 43.0268, lng: -87.9125}, venueID: '4ff77595e4b0a0306c55cadc'},
     {title: "Safe House", location: {lat: 43.0404, lng: -87.9101}, venueID: '4a74fb1bf964a52031e01fe3'},
     {title: "Pabst Mansion", location: {lat: 43.0392, lng: -87.9380}, venueID: '4b3109b6f964a520b6fe24e3'},
     {title: "Harley-Davidson Museum", location: {lat: 43.031939, lng: -87.916455}, venueID: '4ad4ac8af964a5209ae820e3'},
